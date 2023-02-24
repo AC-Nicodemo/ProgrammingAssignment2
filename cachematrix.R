@@ -7,18 +7,18 @@ makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
   
   #set matrix x as y, sets inv (in the parent environment) as NULL
-  set <- function(y) {
-    x <<- y
+  set <- function(a) {
+    x <<- a
     inv <<- NULL
   }
   
   #return matrix x
   get <- function() x
   
-  #set the inverse
+  #sets the inverse
   setinverse <- function(inverse) inv <<- inverse
   
-  #return inverse
+  #returns inverse
   getinverse <- function() inv
   
   #list of the  functions is returned
