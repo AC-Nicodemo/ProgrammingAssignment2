@@ -1,10 +1,9 @@
-#These functions are used to make matrix inversion. First caching
 
-## this function creates a special "matrix" object that can cache its inverse.
+## This function creates a special "matrix" object that can cache its inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
   
-  #initialise inv setting it's initial value
+  #initialise inv setting it's initial value as NULL
   inv <- NULL
   
   #set matrix x as y, sets inv (in the parent environment) as NULL
