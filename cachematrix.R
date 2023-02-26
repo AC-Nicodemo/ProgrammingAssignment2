@@ -1,3 +1,14 @@
+# As example, to invert a matrix take the example:
+  #A =
+      # 1  2  3
+      # 0  1  4
+      # 5  6  0
+
+#Inverted, it turns to:
+  #A^-1 =
+      # -24   18    5
+      #  20  -15   -4
+      #  -5   4     1
 
 ## This function creates a special "matrix" object that can cache its inverse.
 
@@ -7,8 +18,8 @@ makeCacheMatrix <- function(m = matrix()) {
   inv <- NULL
   
   #set matrix x as y, sets inv (in the parent environment) as NULL
-  set <- function(a) {
-    m <<- a
+  set <- function(y) {
+    m <<- y
     inv <<- NULL
   }
   
@@ -16,11 +27,13 @@ makeCacheMatrix <- function(m = matrix()) {
   get <- function() m
   
   #sets the inverse and then returns it
-  setinverse <- function(inverse) inv <<- inverse
-  getinverse <- function() inv
+  setinv <- function(inverse) inv <<- inverse
+  getinv <- function() inv
   
   #list of the  functions is returned
-  list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
+  list(set = set, get = get,
+       setinv = setinv,
+       getinv = getinv)
 }
 
 
@@ -29,17 +42,18 @@ makeCacheMatrix <- function(m = matrix()) {
 
 cacheSolve <- function(m, ...) {
   
-  inv <- m$getinverse()
+  inv <- m$getinv()
   
   #if there already is an inverse cached in inv from previous function, return the value
   if(!is.null(inv)) {
-    inv
+    message("getting cached data")
+    return(inv)
   }
   
   #if not, calculates inverse of x through function solve
   data <- m$get()
   inv <- solve(data, ...)
-  m$setinverse(inv)
+  m$setinv(inv)
   inv
 }
 
